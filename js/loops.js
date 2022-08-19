@@ -8,61 +8,46 @@ const myTestObject = {
     shark: { name: 'haj', picture: '/img/_WW236934.jpg', description: 'not a nice fellow' },
 };
 
+let galleryCardClass = 'galleryCard';
 
 // the app lives here
 const myApp = document.getElementById('app');
 
+buildGallery();
 
+function buildGallery() {
+    for (let myIndex in myTestObject) {
+        let myName = myTestObject[myIndex].name;
+        let myUrl = myTestObject[myIndex].picture;
+        let myDescription = myTestObject[myIndex].description;
 
+        buildCard(myName, myUrl, myDescription);
 
-
-// for loop
-for (let i = 0; i < 5; i++) {
-    console.log('step ' + i);
-}
-
-
-
-// while loop remember to make the expression get to false otherwise the browser crashes.
-let i = 0;
-while (i < 10) {
-    console.log("The number is " + i);
-    i++;
-}
-
-
-/* // for in loop used with arrays
-for (let myIndex in myTestarray) {
-    console.log(myTestarray[myIndex]);
-    testCard(myTestarray[myIndex], 'app')
-}
-
-
-// for loop to use with objects and keys
-
-for (let myIndex in myTestObject) {
-    console.log(myTestObject[myIndex].name);
-    testCard(myTestObject[myIndex].name, 'app')
-} */
-
-
-
-
-
-// debug functions ----------------------------------------------------------------------------
-//  creates a simple headline with the textmsg in a h2 in the supplied id
-// testCard('weee', 'app');
-function testCard(textMsg, myId, clearContainer) {
-    let myParent = document.getElementById(myId);
-
-    // clear if clearContainer is set
-    if (clearContainer) {
-        myParent.innerHTML = '';
     }
+}
 
-    // create elements
-    let myHeadline = document.createElement('h2');
-    myHeadline.innerText = textMsg;
-    myParent.appendChild(myHeadline);
+function buildCard(myHeadline, myUrl, myDescription, clearParent) {
+    if (clearParent) {
+        myApp.innerHTML = '';
 
+    }
+        const myCard = document.createElement('figure');
+        const cardHeadline = document.createElement('h2');
+        const cardImage = document.createElement('img');
+        const cardDescription = document.createElement('p');
+
+
+        cardHeadline.innerText = myHeadline;
+        cardImage.src = myUrl;
+        cardDescription.innerText = myDescription;
+
+        myCard.appendChild(cardHeadline);
+        myCard.appendChild(cardImage);
+        myCard.appendChild(cardDescription);
+
+
+        myCard.classList.add(galleryCardClass);
+
+        myApp.appendChild(myCard);
+    
 }
